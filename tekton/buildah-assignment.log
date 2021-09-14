@@ -1,0 +1,88 @@
+[clone-repository : clone] + CHECKOUT_DIR=/workspace/output/
+[clone-repository : clone] + [[ true == \t\r\u\e ]]
+[clone-repository : clone] + cleandir
+[clone-repository : clone] + [[ -d /workspace/output/ ]]
+[clone-repository : clone] + rm -rf '/workspace/output//*'
+[clone-repository : clone] + rm -rf '/workspace/output//.[!.]*'
+[clone-repository : clone] + rm -rf '/workspace/output//..?*'
+[clone-repository : clone] + test -z ''
+[clone-repository : clone] + test -z ''
+[clone-repository : clone] + test -z ''
+[clone-repository : clone] + /ko-app/git-init -url https://github.com/jinchihe/express-sample-app -revision '' -refspec '' -path /workspace/output/ -sslVerify=true -submodules=true -depth 1
+[clone-repository : clone] {"level":"info","ts":1631590890.244321,"caller":"git/git.go:157","msg":"Successfully cloned https://github.com/jinchihe/express-sample-app @ 9bd29e824a2090259b519d4f2619053928ad3d7e (grafted, HEAD) in path /workspace/output/"}
+[clone-repository : clone] {"level":"info","ts":1631590890.6771932,"caller":"git/git.go:198","msg":"Successfully initialized and updated submodules in path /workspace/output/"}
+[clone-repository : clone] + cd /workspace/output/
+[clone-repository : clone] ++ git rev-parse HEAD
+[clone-repository : clone] + RESULT_SHA=9bd29e824a2090259b519d4f2619053928ad3d7e
+[clone-repository : clone] + EXIT_CODE=0
+[clone-repository : clone] + '[' 0 '!=' 0 ']'
+[clone-repository : clone] + echo -n 9bd29e824a2090259b519d4f2619053928ad3d7e
+[clone-repository : clone] + echo -n https://github.com/jinchihe/express-sample-app
+
+[run-tests : npm-run] added 479 packages in 19.992s
+[run-tests : npm-run] 
+[run-tests : npm-run] > express-sample-app@0.0.0 test /workspace/source
+[run-tests : npm-run] > jest
+[run-tests : npm-run] 
+[run-tests : npm-run] PASS ./sample.test.js
+[run-tests : npm-run]   A sample test
+[run-tests : npm-run]     ✓ used for demonstrative purposes (3 ms)
+[run-tests : npm-run] 
+[run-tests : npm-run] Test Suites: 1 passed, 1 total
+[run-tests : npm-run] Tests:       1 passed, 1 total
+[run-tests : npm-run] Snapshots:   0 total
+[run-tests : npm-run] Time:        2.218 s
+[run-tests : npm-run] Ran all test suites.
+
+[build-and-push-image : build] + buildah --storage-driver=overlay bud --format=oci --tls-verify=true --no-cache -f ./Dockerfile -t quay.io/hejinchi_ibm/express-sample-app:9bd29e824a2090259b519d4f2619053928ad3d7e .
+[build-and-push-image : build] STEP 1: FROM quay.io/upslopeio/node-alpine
+[build-and-push-image : build] Getting image source signatures
+[build-and-push-image : build] Copying blob sha256:b78962e1a5c8c974c4663e987d7b61e6c80a85d7042819e99b031c377007d69f
+[build-and-push-image : build] Copying blob sha256:0040dd60b7a47c7eb81961c48a17926755b00598f9753a499156bb0de7081dd9
+[build-and-push-image : build] Copying blob sha256:fdd4ce4fd760cc2dc2cd21003bda974f04fa4c6dc16a0eaaee0606e5134b28e9
+[build-and-push-image : build] Copying blob sha256:540db60ca9383eac9e418f78490994d0af424aab7bf6d0e47ac8ed4e2e9bcbba
+[build-and-push-image : build] Copying config sha256:48de5d16038cc532b2b5ef91f8d1028f5542b8196f5c6eced9c172894a7af337
+[build-and-push-image : build] Writing manifest to image destination
+[build-and-push-image : build] Storing signatures
+[build-and-push-image : build] STEP 2: WORKDIR /usr/src/app
+[build-and-push-image : build] STEP 3: COPY package*.json ./
+[build-and-push-image : build] STEP 4: RUN npm ci
+[build-and-push-image : build] 
+[build-and-push-image : build] added 479 packages, and audited 480 packages in 12s
+[build-and-push-image : build] 
+[build-and-push-image : build] 1 moderate severity vulnerability
+[build-and-push-image : build] 
+[build-and-push-image : build] To address all issues, run:
+[build-and-push-image : build]   npm audit fix
+[build-and-push-image : build] 
+[build-and-push-image : build] Run `npm audit` for details.
+[build-and-push-image : build] npm notice 
+[build-and-push-image : build] npm notice New minor version of npm available! 7.15.1 -> 7.23.0
+[build-and-push-image : build] npm notice Changelog: <https://github.com/npm/cli/releases/tag/v7.23.0>
+[build-and-push-image : build] npm notice Run `npm install -g npm@7.23.0` to update!
+[build-and-push-image : build] npm notice 
+[build-and-push-image : build] STEP 5: COPY . .
+[build-and-push-image : build] STEP 6: EXPOSE 3000
+[build-and-push-image : build] STEP 7: CMD ["npm", "start"]
+[build-and-push-image : build] STEP 8: COMMIT quay.io/hejinchi_ibm/express-sample-app:9bd29e824a2090259b519d4f2619053928ad3d7e
+[build-and-push-image : build] --> ce28ef5a22d
+[build-and-push-image : build] ce28ef5a22d4394e567a50096dcf119f67fba35c650f6a71de82fedf2730915b
+
+[build-and-push-image : push] + buildah --storage-driver=overlay push --tls-verify=true --digestfile /workspace/source/image-digest quay.io/hejinchi_ibm/express-sample-app:9bd29e824a2090259b519d4f2619053928ad3d7e docker://quay.io/hejinchi_ibm/express-sample-app:9bd29e824a2090259b519d4f2619053928ad3d7e
+[build-and-push-image : push] Getting image source signatures
+[build-and-push-image : push] Copying blob sha256:224c26bb6ab736702a9e077ab8ea4697b74f48e18da039414f9ec88e77cae5d3
+[build-and-push-image : push] Copying blob sha256:6ff94098dca3125f917df25ed8fcae9079c9ab40c338022d84fdec4e42cf6f55
+[build-and-push-image : push] Copying blob sha256:d70a24f36618818e5c04bcfc323746e7f133d034d55f9a204b0b027bfd8b2b38
+[build-and-push-image : push] Copying blob sha256:ace9a27c01e56038c748285486c474da9d1f9c07f9b72ef437a192be8f7586ce
+[build-and-push-image : push] Copying blob sha256:b2d5eeeaba3a22b9b8aa97261957974a6bd65274ebd43e1d81d0a7b8b752b116
+[build-and-push-image : push] Copying config sha256:ce28ef5a22d4394e567a50096dcf119f67fba35c650f6a71de82fedf2730915b
+[build-and-push-image : push] Writing manifest to image destination
+[build-and-push-image : push] Copying config sha256:ce28ef5a22d4394e567a50096dcf119f67fba35c650f6a71de82fedf2730915b
+[build-and-push-image : push] Writing manifest to image destination
+[build-and-push-image : push] Writing manifest to image destination
+[build-and-push-image : push] Storing signatures
+
+[build-and-push-image : digest-to-results] + tee /tekton/results/IMAGE_DIGEST
+[build-and-push-image : digest-to-results] + cat /workspace/source/image-digest
+[build-and-push-image : digest-to-results] sha256:75574453550092b573f109a4a541aa2b4667a7949bb3fd9f6f4f238db0d08538
+
