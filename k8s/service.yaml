@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: jinchi-he-express
+    app.kubernetes.io/instance: jinchi-he-express-instance
+    app.kubernetes.io/name: jinchi-he-express
+  name: jinchi-he-express
+spec:
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 3000
+  selector:
+    app.kubernetes.io/instance: jinchi-he-express-instance
+    app.kubernetes.io/name: jinchi-he-express
+  sessionAffinity: None
+  type: ClusterIP
